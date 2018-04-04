@@ -34,12 +34,13 @@ object AsyncRouteHandler extends App {
     case HttpRequest(GET, Uri.Path("/async"), _, _, _) => {
       logger.info("calling io")
       val future = doBlockingIO()
+      future.onComplete(_ => logger.info("future done"))
       logger.info("done calling io")
       future
     }
   }
 
-  val future = Http().bindAndHandleAsync(asyncHandler, "localhost", 8080, settings = serverSettings)
+  val future = Http().bindAndHandleAsync(asyncHandler, "localhost", 8080, settings = serverSettings, parallelism = 4)
   logger.info("Server Started @8080\nPress Enter to Stop...")
   StdIn.readLine()
   future

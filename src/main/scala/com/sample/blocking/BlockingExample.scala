@@ -3,10 +3,9 @@ package com.sample.blocking
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{HttpRequest, HttpResponse}
+import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
-import akka.http.scaladsl.server.Directives._
 
 import scala.concurrent.Future
 import scala.io.StdIn
@@ -30,6 +29,7 @@ object BlockingExample extends App {
 
   val routes = {
     path("blocking") {
+      logger.info("IO calling")
       val future: Future[String] = doBlockingIO()
       logger.info("IO call done...")
       onSuccess(future) {
