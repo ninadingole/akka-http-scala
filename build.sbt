@@ -11,6 +11,7 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http"   % akkaHttpVersion
 libraryDependencies += "com.typesafe.akka" %% "akka-actor"  % akkaVersion
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.11"
 libraryDependencies += "com.typesafe.akka" %% "akka-http2-support" % akkaHttpVersion
+libraryDependencies += "com.github.swagger-akka-http" %% "swagger-akka-http" % "0.14.0"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test
 libraryDependencies += "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion     % Test
 
