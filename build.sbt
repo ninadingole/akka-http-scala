@@ -19,7 +19,7 @@ libraryDependencies += "io.spray" %%  "spray-json" % "1.3.3"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.1"
 
 
-enablePlugins(JavaAppPackaging)
 enablePlugins(SiteScaladocPlugin)
+enablePlugins(OpenShiftDockerPlugin)
 
 previewFixedPort := Some(8090)
