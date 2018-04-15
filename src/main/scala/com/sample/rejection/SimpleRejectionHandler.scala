@@ -2,22 +2,22 @@ package com.sample.rejection
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.{Rejection, RejectionHandler, Route}
+import akka.http.scaladsl.server.{RejectionHandler, Route}
 import akka.stream.ActorMaterializer
 
 import scala.concurrent.Future
 import scala.io.StdIn
 
-object RejectEmptyResponse extends App with SprayJsonSupport {
+object SimpleRejectionHandler extends App {
+
   implicit val system           = ActorSystem("http-server")
   implicit val materializer     = ActorMaterializer()
   implicit val executionContext = system.dispatcher
 
   case class ErrorResponse(code: Int, `type`: String, message: String)
-  final class DataNotFound(message: String) extends Rejection {}
+  final case class DataNotFound(message: String)
 
   implicit def rejectionHandler =
     RejectionHandler
@@ -30,7 +30,9 @@ object RejectEmptyResponse extends App with SprayJsonSupport {
   val routes: Route = {
     path("reject-empty-response") {
       rejectEmptyResponse {
-        reject(new DataNotFound()
+        complete {
+          Option.empty[String]
+        }
       }
     }
   }
