@@ -22,9 +22,6 @@ object RejectEmptyResponse extends App with SprayJsonSupport {
   implicit def rejectionHandler =
     RejectionHandler
       .newBuilder()
-      .handle {
-        case DataNotFound => complete()
-      }
       .handleNotFound {
         complete((NotFound, "Not here!"))
       }
