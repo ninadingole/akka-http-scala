@@ -6,7 +6,7 @@ import io.swagger.models.ExternalDocs
 import io.swagger.models.auth.BasicAuthDefinition
 
 object SwaggerDocService extends SwaggerHttpService {
-  override val apiClasses                = Set(classOf[SimpleAPI])
+  override val apiClasses                = Set(classOf[SimpleAPI], classOf[ComplexApi])
   override val host                      = "localhost:8089"
   override val info                      = Info(version = "1.0")
   override val externalDocs              = Some(new ExternalDocs("Core Docs", "http://acme.com/docs"))

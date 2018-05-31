@@ -15,7 +15,7 @@ object SwaggerServer extends Site with App {
   implicit val materializer     = ActorMaterializer()
   implicit val executionContext = system.dispatcher
 
-  val routes = new SimpleAPI().routes ~ SwaggerDocService.routes ~ site
+  val routes = new SimpleAPI().routes ~ new ComplexApiImpl().routes ~ SwaggerDocService.routes ~ site
 
   private val future: Future[Http.ServerBinding] = Http().bindAndHandle(routes, "localhost", 8089)
   println("Swagger API started on 8089\nPress Enter to stop...")
