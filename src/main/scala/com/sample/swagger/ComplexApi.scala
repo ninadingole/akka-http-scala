@@ -4,6 +4,8 @@ import io.swagger.annotations._
 import javax.ws.rs.{Path, PathParam}
 import spray.json._
 
+import scala.annotation.meta.field
+
 @Api(value = "/complex", produces = "application/json")
 @Path("/employees")
 trait ComplexApi {
@@ -27,8 +29,22 @@ trait ComplexApi {
 
 }
 
-case class Employee(id: Int, name: Name, dept: String, joiningDate: String)
-case class Name(firstName: String, middleName: Option[String], lastName: String)
+@ApiModel(description = "Employee Details Object")
+case class Employee(@(ApiModelProperty @field)(value = "Id of Employee", required = true)
+                    id: Int,
+                    @(ApiModelProperty @field)(value = "Name of Employee", required = true)
+                    name: Name,
+                    @(ApiModelProperty @field)(value = "Working Department of Employee")
+                    dept: String,
+                    @(ApiModelProperty @field)(value = "Date of employee joining", required = true)
+                    joiningDate: String)
+@ApiModel(description = "Model To Represent Name of an Employee")
+case class Name(@(ApiModelProperty @field)(value = "First Name of employee", required = true)
+                firstName: String,
+                @(ApiModelProperty @field)(value = "Middle name which can be optional")
+                middleName: Option[String],
+                @(ApiModelProperty @field)(value = "Last Name of employee", required = true)
+                lastName: String)
 
 object EmployeeSupport extends DefaultJsonProtocol {
   implicit val formatName     = jsonFormat3(Name)
