@@ -12,6 +12,9 @@ class ComplexApiImpl extends ComplexApi with SprayJsonSupport {
     get {
       path(IntNumber) { id =>
         complete(getEmployee(id))
+      } ~
+      pathEndOrSingleSlash {
+        complete(listEmployees())
       }
     }
   }
@@ -19,5 +22,9 @@ class ComplexApiImpl extends ComplexApi with SprayJsonSupport {
   override def getEmployee(id: Int): Employee = {
 
     Employee(101, Name("John", Some("M"), "Doe"), "HR", LocalDate.now().toString)
+  }
+
+  override def listEmployees(): List[Employee] = {
+    List(Employee(101, Name("John", Some("M"), "Doe"), "HR", LocalDate.now().toString))
   }
 }

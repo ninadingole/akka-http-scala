@@ -25,7 +25,21 @@ trait ComplexApi {
     Array(new ApiResponse(code = 200, message = "Details of Employee", response = classOf[Employee]),
           new ApiResponse(code = 404, message = "Employee Id not Found"))
   )
-  def getEmployee(@PathParam(value = "employeeId") id: Int): Employee
+  def getEmployee(@(PathParam @field)("employeeId") id: Int): Employee
+
+  @ApiOperation(value = "List All Employees", httpMethod = "GET", response = classOf[List[Employee]])
+  @Path("/")
+  @ApiImplicitParams(
+    Array(
+      new ApiImplicitParam(name = "userId",
+                           value = "userid of logged in user",
+                           required = true,
+                           dataTypeClass = classOf[Int],
+                           paramType = "header")
+    )
+  )
+  @ApiResponses(Array(new ApiResponse(code = 200, message = "List of Employees", response = classOf[List[Employee]])))
+  def listEmployees(): List[Employee]
 
 }
 

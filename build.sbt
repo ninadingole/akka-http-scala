@@ -21,4 +21,5 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.1"
 
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(OpenShiftDockerPlugin)
+enablePlugins(ReleasePlugin)
 previewFixedPort := Some(8090)
