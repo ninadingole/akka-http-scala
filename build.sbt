@@ -22,7 +22,11 @@ libraryDependencies += "io.spray" %%  "spray-json" % "1.3.3"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.1"
 
 
+publishTo := Some(Resolver.file("file",new File(".")))
+
+publishArtifact:= false
+
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(OpenShiftDockerPlugin)
-enablePlugins(ReleasePlugin)
+enablePlugins(CustomReleasePlugin)
 previewFixedPort := Some(8090)
