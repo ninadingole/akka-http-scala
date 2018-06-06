@@ -7,6 +7,8 @@ scalaVersion := "2.12.5"
 val akkaHttpVersion = "10.1.0"
 val akkaVersion = "2.5.11"
 
+publishTo := Some("Local" at "~/.m2/repository")
+
 
 releaseIgnoreUntrackedFiles := true
 
@@ -22,9 +24,6 @@ libraryDependencies += "io.spray" %%  "spray-json" % "1.3.3"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.1"
 
 
-publishTo := Some(Resolver.file("file",new File(".")))
-
-publishArtifact:= false
 
 enablePlugins(SiteScaladocPlugin)
 enablePlugins(OpenShiftDockerPlugin)

@@ -7,17 +7,17 @@ object CustomReleasePlugin extends AutoPlugin {
 
   override def requires = ReleasePlugin
 
-  override def projectSettings: Seq[Def.Setting[_]] = {
-    releaseProcess := Seq[ReleaseStep](checkSnapshotDependencies,
-                                       inquireVersions,
-                                       runClean,
-                                       runTest,
-                                       setReleaseVersion,
-                            `           commitReleaseVersion,
-                                       tagRelease,
-                                       releaseStepCommandAndRemaining("publish"),
-                                       setNextVersion,
-                                       commitNextVersion,
-                                       pushChanges)
-  }
+  override def projectSettings: Seq[Def.Setting[_]] = Seq[Def.Setting[_]](releaseProcess := data)
+
+  lazy val data = Seq[ReleaseStep](checkSnapshotDependencies,
+                                   inquireVersions,
+                                   runClean,
+                                   runTest,
+                                   setReleaseVersion,
+                                   commitReleaseVersion,
+                                   tagRelease,
+                                   releaseStepCommandAndRemaining("publish"),
+                                   setNextVersion,
+                                   commitNextVersion,
+                                   pushChanges)
 }
